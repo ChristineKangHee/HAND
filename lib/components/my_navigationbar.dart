@@ -7,6 +7,13 @@ class CustomNavigationBar extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /*
+  사용 방법
+  Scaffold 에서 아래와 같이 사용
+
+  bottomNavigationBar: const CustomNavigationBar(),
+   */
+
   @override
   Widget build(BuildContext context) {
     final navigationProvider = Provider.of<NavigationProvider>(context);
