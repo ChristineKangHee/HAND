@@ -8,10 +8,10 @@ void main() {
   runApp(
     MultiProvider(
         providers: [
-          ChangeNotifierProvider( // 테마 Provider
+          ChangeNotifierProvider( // 테마 Provider / app_state.dart 존재
             create: (context) => ThemeProvider(context),
           ),
-          ChangeNotifierProvider( // 바텀 네비게이션 Provider
+          ChangeNotifierProvider( // 바텀 네비게이션 Provider / app_state.dart 존재
             create: (context) => NavigationProvider(),
           ),
         ],

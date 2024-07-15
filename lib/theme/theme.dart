@@ -1,5 +1,10 @@
 import "package:flutter/material.dart";
 
+/*
+아래와 같이 컬러 사용
+color: Theme.of(context).colorScheme.onSurface
+ */
+
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xFFF5A536), // App Key Color

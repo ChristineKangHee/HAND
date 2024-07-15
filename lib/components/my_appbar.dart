@@ -11,6 +11,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor = Colors.white, // 기본값을 흰색으로 설정
     this.onSearchPressed,
   }) : super(key: key);
+  /*
+    사용 방법
+    Scaffold 에서 아래와 같이 사용
+
+    appBar: CustomAppBar(
+      title: '매장 목록',
+      onSearchPressed: () {
+        print("검색");
+      },
+    ),
+
+   */
+
+
 
   @override
   Widget build(BuildContext context) {

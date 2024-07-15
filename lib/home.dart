@@ -7,6 +7,7 @@ import 'package:test_project/components/my_navigationbar.dart';
 import 'package:test_project/theme/font.dart';
 
 import 'app_state.dart';
+import 'components/my_divider.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
@@ -16,6 +17,11 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+
+    // 개별 device 의 width, height 설정
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+
 
     return Scaffold(
       // appBar: CustomAppBar(
@@ -92,16 +98,33 @@ class MyHomePage extends StatelessWidget {
                   style: pretendardThin(context),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Button(
+                  function: () {
+                    Navigator.pushNamed(context, '/search');
+                    //function 은 상황에 맞게 재 정의 할 것.
+                  },
+                  title: 'Custom Button2',
+                  // 버튼 안에 들어갈 텍스트.
+                ),
+              ),
+
+              SmallDivider(),
+
+              Container(
+                width: MediaQuery.of(context).size.width,
                 child: Button(
                   function: () {
                     print("Button pressed");
+                    //function 은 상황에 맞게 재 정의 할 것.
                   },
                   title: 'Custom Button',
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  // 버튼 안에 들어갈 텍스트.
                 ),
               ),
+              BigDivider(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
