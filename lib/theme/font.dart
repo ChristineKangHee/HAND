@@ -4,7 +4,7 @@ TextStyle pretendardBlack(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w900,
-        fontSize: 50,
+        fontSize: 16,
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
@@ -13,7 +13,7 @@ TextStyle pretendardExtraBold(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w800,
-        fontSize: 50,
+        fontSize: 16,
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
@@ -22,7 +22,7 @@ TextStyle pretendardBold(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w700,
-        fontSize: 50,
+        fontSize: 16,
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
@@ -40,7 +40,7 @@ TextStyle pretendardMedium(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w500,
-        fontSize: 50,
+        fontSize: 16,
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
@@ -58,7 +58,7 @@ TextStyle pretendardLight(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w300,
-        fontSize: 50,
+        fontSize: 14,
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
@@ -67,7 +67,7 @@ TextStyle pretendardExtraLight(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w200,
-        fontSize: 50,
+        fontSize: 16,
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
@@ -76,7 +76,52 @@ TextStyle pretendardThin(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w100,
-        fontSize: 50,
+        fontSize: 16,
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
+    );
+}
+
+TextStyle pretendardBoldPrimary(BuildContext context) {
+    return TextStyle(
+        fontFamily: 'Pretendard',
+        fontWeight: FontWeight.w700,
+        fontSize: 36,
+        color: Theme.of(context).colorScheme.primary, // Light: 검 Dark: 흰
+    );
+}
+
+TextStyle pretendardLightLast(BuildContext context) {
+    return TextStyle(
+        fontFamily: 'Pretendard',
+        fontWeight: FontWeight.w300,
+        fontSize: 16,
+        color: Theme.of(context).colorScheme.shadow, // Light: 검 Dark: 흰
+    );
+}
+
+TextStyle pretendardSemiBoldPrimary(BuildContext context) {
+    return TextStyle(
+        fontFamily: 'Pretendard',
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+        color: Theme.of(context).colorScheme.primary, // Light: 흰 Dark: 검
+    );
+}
+
+TextStyle pretendardSemiBoldSecond(BuildContext context) {
+    return TextStyle(
+        fontFamily: 'Pretendard',
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+        color: Theme.of(context).colorScheme.secondary, // Light: 흰 Dark: 검
+    );
+}
+
+TextStyle pretendardRegularSecond(BuildContext context) {
+    return TextStyle(
+        fontFamily: 'Pretendard',
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        color: Theme.of(context).colorScheme.secondary, // Light: 검 Dark: 흰
     );
 }

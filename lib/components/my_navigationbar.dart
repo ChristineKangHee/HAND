@@ -26,11 +26,11 @@ class CustomNavigationBar extends StatelessWidget {
       onTap: (index) => navigationProvider.navigateToIndex(context, index),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home_rounded),
           label: '홈',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
+          icon: Icon(Icons.favorite_rounded),
           label: '관심매장',
         ),
         BottomNavigationBarItem(
@@ -38,11 +38,11 @@ class CustomNavigationBar extends StatelessWidget {
           label: '지도',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.library_books),
+          icon: Icon(Icons.library_books_rounded),
           label: '주문내역',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.person_rounded),
           label: '마이페이지',
         ),
       ],

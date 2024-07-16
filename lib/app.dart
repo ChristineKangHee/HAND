@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/mypage': (BuildContext context) => const MyPage(),
         '/order': (BuildContext context) => const OrderListPage(),
         '/favorite': (BuildContext context) => const FavoritePage(),
-        '/search': (BuildContext context) => SearchPage(),
+        '/search': (BuildContext context) => SearchPage(title: '',),
       },
     );
   }
