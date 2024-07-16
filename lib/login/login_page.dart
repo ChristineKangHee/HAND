@@ -52,6 +52,11 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+
+                  //////////////////////////////////////////////////////////////////////
+                  ///////                        이메일                            ///////
+                  //////////////////////////////////////////////////////////////////////
+
                   SizedBox(height: screenHeight * 0.05),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -87,6 +92,11 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+
+                  //////////////////////////////////////////////////////////////////////
+                  ///////                        비밀 번호                         ///////
+                  //////////////////////////////////////////////////////////////////////
+
                   SizedBox(height: screenHeight * 0.02),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -127,6 +137,11 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: true,
                     ),
                   ),
+
+                  //////////////////////////////////////////////////////////////////////
+                  ///////               자동로그인, 아이디/비밀번호 찾기                 ///////
+                  //////////////////////////////////////////////////////////////////////
+
                   SizedBox(height: screenHeight * 0.015 / 2),
                   Container(
                     width: screenWidth,
@@ -150,6 +165,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.015 / 2),
+
+                  //////////////////////////////////////////////////////////////////////
+                  ///////                         로그인                           ///////
+                  //////////////////////////////////////////////////////////////////////
+
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: Button(
@@ -163,6 +183,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   SizedBox(height: screenHeight * 0.03),
+
+                  //////////////////////////////////////////////////////////////////////
+                  ///////                        회원가입                          ///////
+                  //////////////////////////////////////////////////////////////////////
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -179,34 +204,14 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     SizedBox(
-                  //       width: screenWidth*0.2,
-                  //       child: const LoginDivider(),
-                  //     ),
-                  //     Padding(
-                  //       padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  //       child: Text(
-                  //         'OR',
-                  //         textAlign: TextAlign.center,
-                  //         style: TextStyle(
-                  //           fontSize: screenHeight * 0.02,
-                  //           color: Color(0xFFE1E1E1),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     SizedBox(
-                  //       width: screenWidth*0.2,
-                  //       child: const LoginDivider(),
-                  //     ),
-                  //   ],
-                  // ),
 
                   SizedBox(height: screenHeight * 0.03),
                   const BigDivider(),
                   SizedBox(height: screenHeight * 0.03),
+
+                  //////////////////////////////////////////////////////////////////////
+                  ///////                       간편 로그인                         ///////
+                  //////////////////////////////////////////////////////////////////////
 
                   Container(
                     alignment: AlignmentDirectional.center,
@@ -214,8 +219,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text("또는 간편로그인하기", style: pretendardRegularSecond(context),)
                   ),
 
-                  SizedBox(height: screenHeight * 0.03),
+                  SizedBox(height: screenHeight * 0.015),
 
+                  // ****간편 로그인 아이콘****
                   Container(
                     width: screenWidth,
                     child: Row(
@@ -245,32 +251,6 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   )
-
-                  // Container(
-                  //   width: MediaQuery.of(context).size.width,
-                  //   child: ButtonImage(
-                  //     function: () {
-                  //       print("Button pressed");
-                  //       //function 은 상황에 맞게 재 정의 할 것.
-                  //     },
-                  //     title: '애플로 로그인하기',
-                  //     // 버튼 안에 들어갈 텍스트.
-                  //     image: 'assets/images/apple.png',
-                  //   ),
-                  // ),
-                  // SizedBox(height: screenHeight * 0.01),
-                  // Container(
-                  //   width: MediaQuery.of(context).size.width,
-                  //   child: ButtonImage(
-                  //     function: () {
-                  //       print("Button pressed");
-                  //       //function 은 상황에 맞게 재 정의 할 것.
-                  //     },
-                  //     title: '구글로 로그인하기',
-                  //     // 버튼 안에 들어갈 텍스트.
-                  //     image: 'assets/images/google.png',
-                  //   ),
-                  // ),
                 ],
               ),
             ),
