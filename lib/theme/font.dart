@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+// Text(
+//   '예제 텍스트',
+//   style: pretendardBlack(context).copyWith(fontSize: 20), // 폰트 크기만 20으로 변경
+// )
+
 TextStyle pretendardBlack(BuildContext context) {
     return TextStyle(
         fontFamily: 'Pretendard',
@@ -32,7 +37,7 @@ TextStyle pretendardSemiBold(BuildContext context) {
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w600,
         fontSize: 16,
-        color: Theme.of(context).colorScheme.surface, // Light: 흰 Dark: 검
+        color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
 
@@ -80,6 +85,10 @@ TextStyle pretendardThin(BuildContext context) {
         color: Theme.of(context).colorScheme.onSurface, // Light: 검 Dark: 흰
     );
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TextStyle pretendardBoldPrimary(BuildContext context) {
     return TextStyle(

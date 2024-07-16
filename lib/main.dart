@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/app_state.dart';
 import 'app.dart';
 import 'theme/theme.dart';
 
 void main() {
+  //////////////////// 가로 모드 금지 ////////////////////
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(
     MultiProvider(
         providers: [

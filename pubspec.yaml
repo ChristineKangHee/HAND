@@ -48,6 +48,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   google_fonts: ^6.2.1
   provider: ^6.0.0
+  flutter_screenutil: ^5.9.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -67,9 +68,14 @@ flutter:
     - assets/images/banner.png
     - assets/images/recommendation_1.png
     - assets/images/recommendation_2.png
+    - assets/images/recommendation_3.png
+    - assets/images/recommendation_4.png
     - assets/images/ranking_1.png
     - assets/images/ranking_2.png
     - assets/images/ranking_3.png
+    - assets/images/medal_1.png
+    - assets/images/medal_2.png
+    - assets/images/medal_3.png
     - assets/images/appleicon.png
     - assets/images/googleidcon.png
     - assets/images/facebookicon.png

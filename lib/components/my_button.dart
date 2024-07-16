@@ -84,7 +84,7 @@ class Button extends StatelessWidget { //
       }
           : null,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(16,0,16,0),
         child: Container(
           width: MediaQuery.of(context).size.width, //MediaQuery 를 통해서 버튼 넓이 설정해놓음.
           height: 52,
@@ -96,7 +96,7 @@ class Button extends StatelessWidget { //
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: pretendardSemiBold(context) // Text Regular로 설정. 설정 관련은 font.dart
+              style: pretendardSemiBold(context).copyWith(color: Theme.of(context).colorScheme.surface) // SemiBold에 색상 흰색으로 설정. 설정 관련은 font.dart
             ),
           ),
         ),
@@ -106,7 +106,7 @@ class Button extends StatelessWidget { //
 }
 
 class ButtonNatural extends StatelessWidget { //
-  const ButtonNatural( //파라미터
+  const ButtonNatural( // 파라미터
           {Key? key,
         required this.function,
         required this.title,
@@ -127,7 +127,7 @@ class ButtonNatural extends StatelessWidget { //
       }
           : null,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(16,0,16,0),
         child: Container(
           width: MediaQuery.of(context).size.width, //MediaQuery 를 통해서 버튼 넓이 설정해놓음.
           height: 52,
@@ -139,7 +139,7 @@ class ButtonNatural extends StatelessWidget { //
             child: Text(
                 title,
                 textAlign: TextAlign.center,
-                style: pretendardSemiBold(context) // Text Regular로 설정. 설정 관련은 font.dart
+                style: pretendardSemiBold(context).copyWith(color: Theme.of(context).colorScheme.surface) // SemiBold에 색상 흰색으로 설정. 설정 관련은 font.dart
             ),
           ),
         ),
@@ -172,7 +172,7 @@ class ButtonIcon extends StatelessWidget { //
       }
           : null,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(16,0,16,0),
         child: Container(
           width: MediaQuery.of(context).size.width, //MediaQuery 를 통해서 버튼 넓이 설정해놓음.
           height: 52,
@@ -228,7 +228,7 @@ class ButtonImage extends StatelessWidget {
       }
           : null,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+        padding: const EdgeInsets.fromLTRB(16,0,16,0),
         child: Container(
           width: MediaQuery
               .of(context)
@@ -261,8 +261,7 @@ class ButtonImage extends StatelessWidget {
                 Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: pretendardRegular(
-                        context) // Text Regular로 설정. 설정 관련은 font.dart
+                    style: pretendardRegular(context) // Text Regular로 설정. 설정 관련은 font.dart
                 ),
               ],
             ),
