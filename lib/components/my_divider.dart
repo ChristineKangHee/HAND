@@ -48,3 +48,24 @@ class SmallDivider extends StatelessWidget {
     );
   }
 }
+
+class LoginDivider extends StatelessWidget {
+  final double thickness;
+  final double height;
+
+  const LoginDivider({
+    Key? key,
+    this.thickness = 1.0,
+    this.height = 1.0,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      color: Color(0xFFE1E1E1),
+      // color: Theme.of(context).colorScheme.outline,
+      thickness: thickness,
+      height: height,
+    );
+  }
+}
