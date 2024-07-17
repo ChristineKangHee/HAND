@@ -20,7 +20,14 @@ class MyApp extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return ScreenUtilInit(
-        designSize: Size(340, 844),
+        // ScreenUtil 사용법
+        // .w : width             ex: 170.w
+        // .h : height            ex: 170.h
+        // .sw : screenwidth      ex: 0.5.sw (screenwidth의 0.5배)
+        // .sh : screenheight     ex: 0.6.sh (screenheight의 0.6배)
+        // .sp : fontsize         ex: 12.sp
+
+        designSize: Size(340, 844), // 기본 사이즈 설정
 
         child: MaterialApp(
         title: 'Flutter Demo',
