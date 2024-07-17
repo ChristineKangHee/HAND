@@ -5,6 +5,8 @@ import 'package:test_project/components/my_appbar.dart';
 import 'package:test_project/components/my_button.dart';
 import 'package:test_project/components/my_navigationbar.dart';
 import 'package:test_project/theme/font.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:lottie/lottie.dart';
 
 import 'app_state.dart';
 import 'components/my_divider.dart';
@@ -56,7 +58,9 @@ class MyHomePage extends StatelessWidget {
             onPressed: () {},
           ),
         ],
+        titleSpacing: 0,
       ),
+
       //////////////////////////////////////////////////////////////////////
       ///////                         Body                           ///////
       //////////////////////////////////////////////////////////////////////
@@ -67,15 +71,54 @@ class MyHomePage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: SearchWidget(items: items)
             ),
-            Container(
-              width: screenWidth,
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: Image.asset('assets/images/banner.png'), // 광고 배너 이미지
-              ),
-            ),
 
+            //////////////////////////////////////////////////////////////////////
+            ///////                         배너                            ///////
+            //////////////////////////////////////////////////////////////////////
+
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 200.h,
+                enlargeCenterPage: true,
+                enableInfiniteScroll: true,
+                autoPlay: true,
+              ),
+              items: [
+                const PromoCard(
+                  gradientColors: [Color(0xFFFFD8A3), Color(0xFFF5A536)],
+                  title: '아이스크림\n파격 할인 30%\n놓치지 마세요!',
+                  buttonText: '주문하기',
+                  lottieUrl: "https://lottie.host/6a682ede-1f46-44fc-8c85-4ea0b68576e8/ih5hsHubop.json",
+                  imageWidth: 156,
+                  imageHeight: 233,
+                ),
+                const PromoCard(
+                  gradientColors: [Color(0xFF97C5FF), Color(0xFF006FFD)],
+                  title: '내 지역 근방에서 \n구매할 수 있는 \n식품 리스트를 알아보세요!',
+                  buttonText: '알아보기',
+                  lottieUrl: "https://lottie.host/3b1e833e-da6d-4687-beb5-3450848c1e59/8emL58pguN.json",
+                  imageWidth: 96,
+                  imageHeight: 144,
+                ),
+                const PromoCard(
+                  gradientColors: [Color(0x3872B75A), Color(0xFF72B75A)],
+                  title: 'ZERO가 HAND 앱을 통해\n이뤄낸 환경 지키기 발걸음!\n함께 할까요?',
+                  buttonText: '함께하기',
+                  lottieUrl: "https://lottie.host/f9f831e3-b11e-469d-9ca0-2e65fda09785/e0YTsf253L.json",
+                  imageWidth: 118,
+                  imageHeight: 177,
+                ),
+              ].map((card) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      child: card,
+                    );
+                  },
+                );
+              }).toList(),
+            ),
             //////////////////////////////////////////////////////////////////////
             ///////                        카테고리                          ///////
             //////////////////////////////////////////////////////////////////////
@@ -118,7 +161,7 @@ class MyHomePage extends StatelessWidget {
                   const SizedBox(height: 8),
                   Container(
                     width: 1.sw,
-                    height: 0.3.sh,
+                    height: 180.h,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: List.generate(4, (index) {
@@ -172,13 +215,13 @@ class MyHomePage extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(0,0,4,0),
                         child: Text('HAND Top 3 랭킹', style: pretendardBold(context)),
                       ),
-                      Icon(Icons.info, color: Theme.of(context).colorScheme.outline, size: 15.sp,),
+                      Icon(Icons.info, color: Theme.of(context).colorScheme.outline, size: 15,),
                       Expanded(
                           child: Align(
                               alignment: Alignment.bottomRight,
                               child: GestureDetector(
                                 onTap: (){/* 여기에 navigator */},
-                                child: Text("모두 보기", style: pretendardSemiBoldSecond(context).copyWith(fontSize: 15.sp),
+                                child: Text("모두 보기", style: pretendardSemiBoldSecond(context).copyWith(fontSize: 15),
                                 ),
                               )
                           )
@@ -221,12 +264,12 @@ class MyHomePage extends StatelessWidget {
                                 Text(place['name']!, style: pretendardBold(context),),
                                 Row(
                                   children: [
-                                    Icon(Icons.star_rounded, color: Colors.yellow[700], size: 16.sp,),
-                                    Text(place['rating']!, style: pretendardBold(context).copyWith(fontSize: 12.sp),),
-                                    Text(' (${place['reviews']!})', style: pretendardSemiBoldSecond(context).copyWith(fontSize: 12.sp),),
+                                    Icon(Icons.star_rounded, color: Colors.yellow[700], size: 16,),
+                                    Text(place['rating']!, style: pretendardBold(context).copyWith(fontSize: 12),),
+                                    Text(' (${place['reviews']!})', style: pretendardSemiBoldSecond(context).copyWith(fontSize: 12),),
                                   ],
                                 ),
-                                Text('양식 • 양덕동 • ${place['rating']!}', style: pretendardSemiBoldSecond(context).copyWith(fontSize: 12.sp),),
+                                Text('양식 • 양덕동 • ${place['rating']!}', style: pretendardSemiBoldSecond(context).copyWith(fontSize: 12),),
                               ]
                             ),
                           ],
@@ -285,3 +328,112 @@ class SearchWidget extends StatelessWidget {
     );
   }
 }
+
+class PromoCard extends StatelessWidget {
+  final List<Color> gradientColors;
+  final String title;
+  final String buttonText;
+  final String? imageUrl;
+  final double imageWidth;
+  final double imageHeight;
+  final String? lottieUrl;
+
+  const PromoCard({
+    required this.gradientColors,
+    required this.title,
+    required this.buttonText,
+    this.imageUrl,
+    required this.imageWidth,
+    required this.imageHeight,
+    this.lottieUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 354.21.w,
+      height: 152.55.h,
+      clipBehavior: Clip.antiAlias,
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      child: Stack(
+        children: [
+          Container(
+            width: 354.21.w,
+            height: 1.sh,
+            decoration: ShapeDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: gradientColors,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 16,
+            top: 29,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 174.w,
+                  child: Text(
+                    title,
+                    style: pretendardSemiBold(context).copyWith(color: Theme.of(context).colorScheme.surface)
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: ShapeDecoration(
+                    color: Color(0xFF0F0F0F),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        buttonText,
+                        style: pretendardSemiBold(context).copyWith(color: Theme.of(context).colorScheme.surface, fontSize: 12)
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            right: 0,
+            bottom: 0,
+            top: 0,
+            child: Container(
+              width: 156,
+              height: 156,
+              child: imageUrl != null
+                  ? Image(
+                image: imageUrl!.startsWith('http')
+                    ? NetworkImage(imageUrl!)
+                    : AssetImage(imageUrl!) as ImageProvider,
+                fit: BoxFit.cover,
+              )
+                  : lottieUrl != null
+                  ? Lottie.network(lottieUrl!)
+                  : Container(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
