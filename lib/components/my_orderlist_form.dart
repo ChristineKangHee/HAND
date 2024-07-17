@@ -66,7 +66,7 @@ class OrderListForm extends StatelessWidget {
                   width: 68,
                   height: 24,
                   decoration: ShapeDecoration(
-                    color: Color(0xFFF8F9FE),
+                    color: Color(0xFFF8F9FE),//more light
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -81,7 +81,7 @@ class OrderListForm extends StatelessWidget {
                         child: Text(
                           '주문상세',
                           textAlign: TextAlign.center,
-                          style: pretendardMedium(context).copyWith(fontSize: 14),
+                          style: pretendardMedium(context).copyWith(fontSize: 14,),
                         ),
                       ),
                     ],
