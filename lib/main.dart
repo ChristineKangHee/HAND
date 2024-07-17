@@ -6,10 +6,11 @@ import 'app.dart';
 import 'theme/theme.dart';
 
 void main() {
-  //////////////////// 가로 모드 금지 ////////////////////
+  //////////////////// 세로 모드 고정 ////////////////////
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  //////////////////// 세로 모드 고정 ////////////////////
   runApp(
     MultiProvider(
         providers: [

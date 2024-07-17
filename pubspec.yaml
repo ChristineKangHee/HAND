@@ -81,6 +81,16 @@ flutter:
     - assets/images/appleicon.png
     - assets/images/googleidcon.png
     - assets/images/facebookicon.png
+    - assets/images/category_1.png
+    - assets/images/category_2.png
+    - assets/images/category_3.png
+    - assets/images/category_4.png
+    - assets/images/category_5.png
+    - assets/images/category_6.png
+    - assets/images/category_7.png
+    - assets/images/category_8.png
+    - assets/images/category_9.png
+    - assets/images/category_10.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
