@@ -48,11 +48,9 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   google_fonts: ^6.2.1
   provider: ^6.0.0
-  flutter_screenutil: ^5.9.3 # screenutil, 화면에 따라 크기 조정
-  carousel_slider: ^4.0.0 # carousel 사용
-  lottie: ^3.1.2 # lottie image 사용
-  google_maps_flutter: ^2.7.0 # 구글 맵 API
-  geolocator: ^9.0.2 # 유저 위치 가져오기
+  flutter_screenutil: ^5.9.3
+  carousel_slider: ^4.0.0
+  lottie: ^3.1.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
