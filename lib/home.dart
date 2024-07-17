@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_project/components/my_promocard.dart';
 import 'package:test_project/theme/theme.dart';
 import 'package:test_project/components/my_appbar.dart';
 import 'package:test_project/components/my_button.dart';
@@ -31,6 +32,23 @@ class MyHomePage extends StatelessWidget {
       'Fig',
       'Grape',
       'Honeydew',
+    ];
+
+    //////////////////////////////////////////////////////////////////////
+    ///////                      카테고리 항목들                       ///////
+    //////////////////////////////////////////////////////////////////////
+
+    final List<Map<String, String>> categories = [
+      {"image": "assets/images/category_1.png", "label": "과일"},
+      {"image": "assets/images/category_2.png", "label": "채소"},
+      {"image": "assets/images/category_3.png", "label": "제과/제빵"},
+      {"image": "assets/images/category_4.png", "label": "반찬"},
+      {"image": "assets/images/category_5.png", "label": "조리식품"},
+      {"image": "assets/images/category_6.png", "label": "유제품"},
+      {"image": "assets/images/category_7.png", "label": "쌀/잡곡"},
+      {"image": "assets/images/category_8.png", "label": "축/수산물"},
+      {"image": "assets/images/category_9.png", "label": "조미료"},
+      {"image": "assets/images/category_10.png", "label": "기타"},
     ];
 
     // 개별 device 의 width, height 설정
@@ -75,6 +93,7 @@ class MyHomePage extends StatelessWidget {
             //////////////////////////////////////////////////////////////////////
             ///////                         배너                            ///////
             //////////////////////////////////////////////////////////////////////
+            SizedBox(height: 34,),
 
             CarouselSlider(
               options: CarouselOptions(
@@ -119,9 +138,11 @@ class MyHomePage extends StatelessWidget {
                 );
               }).toList(),
             ),
+
             //////////////////////////////////////////////////////////////////////
             ///////                        카테고리                          ///////
             //////////////////////////////////////////////////////////////////////
+            SizedBox(height: 34,),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -133,15 +154,26 @@ class MyHomePage extends StatelessWidget {
                   GridView.count(
                     shrinkWrap: true,
                     crossAxisCount: 5,
-                    children: List.generate(10, (index) {
+                    children: List.generate(categories.length, (index) {
                       return Column(
-                         children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.grey[200],
-                            child: Icon(Icons.category),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            categories[index]["image"]!,
+                            width: 32.w,
+                            height: 38.h,
                           ),
                           SizedBox(height: 4),
-                          Text('카테고리 ${index + 1}', style: TextStyle(fontSize: 12)),
+                          Text(
+                            categories[index]["label"]!,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF1C1C20),
+                              fontSize: 14,
+                              fontFamily: 'Pretendard Variable',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       );
                     }),
@@ -149,9 +181,11 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
             ),
+
             //////////////////////////////////////////////////////////////////////
             ///////                      맞춤 추천 가게                       ///////
             //////////////////////////////////////////////////////////////////////
+            SizedBox(height: 36,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Column(
@@ -203,6 +237,7 @@ class MyHomePage extends StatelessWidget {
             //////////////////////////////////////////////////////////////////////
             ///////                      Top 3 랭킹                         ///////
             //////////////////////////////////////////////////////////////////////
+            SizedBox(height: 46,),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -329,111 +364,5 @@ class SearchWidget extends StatelessWidget {
   }
 }
 
-class PromoCard extends StatelessWidget {
-  final List<Color> gradientColors;
-  final String title;
-  final String buttonText;
-  final String? imageUrl;
-  final double imageWidth;
-  final double imageHeight;
-  final String? lottieUrl;
-
-  const PromoCard({
-    required this.gradientColors,
-    required this.title,
-    required this.buttonText,
-    this.imageUrl,
-    required this.imageWidth,
-    required this.imageHeight,
-    this.lottieUrl,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 354.21.w,
-      height: 152.55.h,
-      clipBehavior: Clip.antiAlias,
-      decoration: ShapeDecoration(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Container(
-            width: 354.21.w,
-            height: 1.sh,
-            decoration: ShapeDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: gradientColors,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 16,
-            top: 29,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 174.w,
-                  child: Text(
-                    title,
-                    style: pretendardSemiBold(context).copyWith(color: Theme.of(context).colorScheme.surface)
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF0F0F0F),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        buttonText,
-                        style: pretendardSemiBold(context).copyWith(color: Theme.of(context).colorScheme.surface, fontSize: 12)
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            right: 0,
-            bottom: 0,
-            top: 0,
-            child: Container(
-              width: 156,
-              height: 156,
-              child: imageUrl != null
-                  ? Image(
-                image: imageUrl!.startsWith('http')
-                    ? NetworkImage(imageUrl!)
-                    : AssetImage(imageUrl!) as ImageProvider,
-                fit: BoxFit.cover,
-              )
-                  : lottieUrl != null
-                  ? Lottie.network(lottieUrl!)
-                  : Container(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 
