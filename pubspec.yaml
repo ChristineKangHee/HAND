@@ -53,6 +53,7 @@ dev_dependencies:
   lottie: ^3.1.2 # lottie image 사용
   google_maps_flutter: ^2.7.0 # 구글 맵 API
   geolocator: ^9.0.2 # 유저 위치 가져오기
+  flutter_image: ^4.1.11 # 이미지 resize
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
