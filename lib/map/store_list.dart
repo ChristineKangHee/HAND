@@ -15,7 +15,6 @@ class StoreListPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              width: 359,
               height: 36,
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
