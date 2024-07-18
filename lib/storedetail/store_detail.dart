@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'package:test_project/components/my_tap_bar.dart';
-import 'package:test_project/theme/font.dart';
 import 'package:test_project/components/my_navigationbar.dart';
 import '../components/my_divider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../theme/font.dart';
 
 class StoreDetailPage extends StatefulWidget {
   final String name;
@@ -13,81 +14,100 @@ class StoreDetailPage extends StatefulWidget {
   State<StoreDetailPage> createState() => _StoreDetailPageState();
 }
 
-class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProviderStateMixin {
+class _StoreDetailPageState extends State<StoreDetailPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late ScrollController _scrollController;
+  bool _isScrolled = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset > 150 && !_isScrolled) {
+      setState(() {
+        _isScrolled = true;
+      });
+    } else if (_scrollController.offset <= 150 && _isScrolled) {
+      setState(() {
+        _isScrolled = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          _buildHeader(context)
-        ],
-      ),
-      bottomNavigationBar: const CustomNavigationBar(),
-    );
-
-
-    // Scaffold(
-    //   body: SingleChildScrollView(
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         _buildHeader(context),
-    //         _buildStoreDetails(context),
-    //       ],
-    //     ),
-    //   ),
-    //   bottomNavigationBar: const CustomNavigationBar(),
-    // );
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-              "https://images.unsplash.com/photo-1634560604992-7784a29bc419?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios_new_outlined, color: Theme.of(context).colorScheme.surface),
-                  onPressed: () => Navigator.pop(context),
+    return SafeArea(
+      child: Scaffold(
+        body: CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 200.0,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.network(
+                  "https://images.unsplash.com/photo-1634560604992-7784a29bc419?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  fit: BoxFit.cover,
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.favorite_border, color: Theme.of(context).colorScheme.surface),
-                    SizedBox(width: 10),
-                    Icon(Icons.shopping_cart_outlined, color: Theme.of(context).colorScheme.surface),
-                  ],
+              ),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios_new_outlined,
+                    color: _isScrolled
+                        ? Theme.of(context).colorScheme.onSurface
+                        : Theme.of(context).colorScheme.surface),
+                onPressed: () => Navigator.pop(context),
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.favorite_border,
+                      color: _isScrolled
+                          ? Theme.of(context).colorScheme.onSurface
+                          : Theme.of(context).colorScheme.surface),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.shopping_cart_outlined,
+                      color: _isScrolled
+                          ? Theme.of(context).colorScheme.onSurface
+                          : Theme.of(context).colorScheme.surface),
+                  onPressed: () {},
                 ),
               ],
             ),
-          ),
-          SizedBox(height: 170),
-        ],
+            SliverList(
+              delegate: SliverChildListDelegate([
+                _buildStoreDetails(context),
+                MyTapBar(tablController: _tabController),
+                SizedBox(height: 10),
+                Container(
+                  height: 800,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      Center(child: Text('Tab 1 Content')),
+                      Center(child: Text('Tab 2 Content')),
+                      Center(child: Text('Tab 3 Content')),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+          ],
+        ),
+        bottomNavigationBar: const CustomNavigationBar(),
       ),
     );
   }
@@ -96,7 +116,10 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +141,9 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
                   '양덕동 마카롱',
                   style: pretendardSemiBold(context).copyWith(
                     fontSize: 20,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: _isScrolled
+                        ? Theme.of(context).colorScheme.surface
+                        : Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 SizedBox(height: 8),
@@ -131,7 +156,9 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
                       '5.0',
                       style: pretendardSemiBold(context).copyWith(
                         fontSize: 14,
-                        color: Theme.of(context).colorScheme.onSurface,
+                        color: _isScrolled
+                            ? Theme.of(context).colorScheme.surface
+                            : Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     SizedBox(width: 5),
@@ -149,7 +176,8 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
                 SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(Icons.access_time_rounded, color: Theme.of(context).colorScheme.secondary),
+                    Icon(Icons.access_time_rounded,
+                        color: Theme.of(context).colorScheme.secondary),
                     SizedBox(width: 6),
                     Text(
                       '영업중',
@@ -172,11 +200,17 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildActionItem(context, '전화', Icon(Icons.call_outlined, color: Theme.of(context).colorScheme.shadow)),
+                    _buildActionItem(context, '전화',
+                        Icon(Icons.call_outlined,
+                            color: Theme.of(context).colorScheme.shadow)),
                     const SizedBox(width: 10),
-                    _buildActionItem(context, '공유', Icon(Icons.ios_share_rounded, color: Theme.of(context).colorScheme.shadow)),
+                    _buildActionItem(context, '공유',
+                        Icon(Icons.ios_share_rounded,
+                            color: Theme.of(context).colorScheme.shadow)),
                     const SizedBox(width: 10),
-                    _buildActionItem(context, '알림', Icon(Icons.notifications_outlined, color: Theme.of(context).colorScheme.shadow)),
+                    _buildActionItem(context, '알림',
+                        Icon(Icons.notifications_outlined,
+                            color: Theme.of(context).colorScheme.shadow)),
                   ],
                 ),
                 SizedBox(height: 8),
@@ -184,25 +218,6 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
             ),
           ),
           BigDivider(),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyTapBar(tablController: _tabController),
-                SizedBox(height: 10),
-                // TabBarView(
-                //   controller: _tabController,
-                //   children: [
-                //     // Replace with your content for each tab
-                //     Center(child: Text('Tab 1 Content')),
-                //     Center(child: Text('Tab 2 Content')),
-                //     Center(child: Text('Tab 3 Content')),
-                //   ],
-                // ),
-              ],
-            ),
-          ),
         ],
       ),
     );
@@ -224,7 +239,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
             Text(
               text,
               textAlign: TextAlign.center,
-              style: pretendardMedium(context).copyWith(
+              style: TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).colorScheme.secondary,
               ),
@@ -236,12 +251,13 @@ class _StoreDetailPageState extends State<StoreDetailPage> with SingleTickerProv
   }
 }
 
-class MyTapBar extends StatelessWidget{
+class MyTapBar extends StatelessWidget {
   final TabController tablController;
+
   const MyTapBar({
-    super.key,
-    required this.tablController
-  });
+    Key? key,
+    required this.tablController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -249,12 +265,11 @@ class MyTapBar extends StatelessWidget{
       child: TabBar(
         controller: tablController,
         tabs: [
-          Tab(text: '메뉴',),
-          Tab(text: '정보',),
-          Tab(text: '리뷰',),
+          Tab(text: '메뉴'),
+          Tab(text: '정보'),
+          Tab(text: '리뷰'),
         ],
       ),
     );
   }
-
 }
