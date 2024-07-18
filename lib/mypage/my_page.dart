@@ -21,7 +21,6 @@ class MyPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              width: screenWidth * 0.95,
               padding: EdgeInsets.symmetric(horizontal: 15 * widthRatio, vertical: 13 * heightRatio),
               decoration: ShapeDecoration(
                 color: const Color(0xFFF8F9FE), // more light

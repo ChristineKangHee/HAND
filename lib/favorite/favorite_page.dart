@@ -1,7 +1,11 @@
+// favorite_page.dart
+
 import 'package:flutter/material.dart';
 import 'package:test_project/theme/font.dart';
 import 'package:test_project/components/my_navigationbar.dart';
 import 'package:test_project/components/my_placewidget.dart';
+import 'package:test_project/model/restaurant.dart';
+import 'package:test_project/model/restaurant_model.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -11,7 +15,14 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  final List<bool> _isFavorited = [false, false, false];
+  List<bool> _isFavorited = [false, false, false];
+  late RestaurantModel _restaurantModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _restaurantModel = RestaurantModel(isFavorited: _isFavorited);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,53 +35,19 @@ class _FavoritePageState extends State<FavoritePage> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              PlaceWidget(
-                name: "덕수파스타 포항 양덕점",
-                rating: "5.0",
-                reviews: "15,250",
-                distance: "1.7km",
-                foodtype: '양식',
-                specificlocation: '양덕동',
-                image: 'assets/images/ranking_1.png',
-                isFavorited: _isFavorited[0],
+            children: _restaurantModel.restaurants.asMap().entries.map((entry) {
+              int index = entry.key;
+              Restaurant restaurant = entry.value;
+              return PlaceWidget(
+                restaurant: restaurant,
                 onFavoriteToggle: () {
                   setState(() {
-                    _isFavorited[0] = !_isFavorited[0];
+                    _isFavorited[index] = !_isFavorited[index];
+                    _restaurantModel = RestaurantModel(isFavorited: _isFavorited);
                   });
                 },
-              ),
-              PlaceWidget(
-                name: "비건베이커리",
-                rating: "4.5",
-                reviews: "2,901",
-                distance: "1.2km",
-                foodtype: '양식',
-                specificlocation: '양덕동',
-                image: 'assets/images/ranking_2.png',
-                isFavorited: _isFavorited[1],
-                onFavoriteToggle: () {
-                  setState(() {
-                    _isFavorited[1] = !_isFavorited[1];
-                  });
-                },
-              ),
-              PlaceWidget(
-                name: "윰포레스트",
-                rating: "4.8",
-                reviews: "1,596",
-                distance: "2.6km",
-                foodtype: '양식',
-                specificlocation: '양덕동',
-                image: 'assets/images/ranking_3.png',
-                isFavorited: _isFavorited[2],
-                onFavoriteToggle: () {
-                  setState(() {
-                    _isFavorited[2] = !_isFavorited[2];
-                  });
-                },
-              ),
-            ],
+              );
+            }).toList(),
           ),
         ),
       ),
