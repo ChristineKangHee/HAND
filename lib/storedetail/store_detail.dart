@@ -46,6 +46,7 @@ class StoreDetailPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 170,),
                   Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
