@@ -1,8 +1,10 @@
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:test_project/theme/font.dart';
 import 'package:test_project/components/my_navigationbar.dart';
+import 'package:flutter/services.dart' show ByteData, Uint8List, rootBundle;
 
 class MapHomePage extends StatefulWidget {
   const MapHomePage({super.key});
@@ -20,6 +22,7 @@ class _MapHomePageState extends State<MapHomePage> {
   String? _selectedStoreName;
   String? _selectedStoreDetails;
   double _currentZoom = 18.0;
+  BitmapDescriptor? _customMarkerIcon;
 
   final List<Map<String, dynamic>> stores = [
     {'name': 'Store 1', 'lat': 37.505080, 'lng': 126.954930, 'details': 'Details about Store 1'},
@@ -31,6 +34,7 @@ class _MapHomePageState extends State<MapHomePage> {
   @override
   void initState() {
     super.initState();
+    _setCustomMarkerIcon();
     _getCurrentLocation();
     _addStoreMarkers();
   }
@@ -38,6 +42,31 @@ class _MapHomePageState extends State<MapHomePage> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  Future<void> _setCustomMarkerIcon() async {
+    final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(pictureRecorder);
+    final Paint paint = Paint()..color = Colors.blue;
+    final double radius = 20.0;
+
+    canvas.drawCircle(
+      Offset(radius, radius),
+      radius,
+      paint,
+    );
+
+    final ui.Image image = await pictureRecorder
+        .endRecording()
+        .toImage((radius * 2).toInt(), (radius * 2).toInt());
+
+    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final Uint8List resizedImage = byteData!.buffer.asUint8List();
+
+    final BitmapDescriptor markerIcon = BitmapDescriptor.fromBytes(resizedImage);
+    setState(() {
+      _customMarkerIcon = markerIcon;
+    });
   }
 
   Future<void> _getCurrentLocation() async {
@@ -122,7 +151,7 @@ class _MapHomePageState extends State<MapHomePage> {
         });
         mapController.showMarkerInfoWindow(MarkerId(position.toString()));
       },
-      icon: BitmapDescriptor.defaultMarker,
+      icon: _customMarkerIcon ?? BitmapDescriptor.defaultMarker,
     );
     setState(() {
       _allMarkers.add(marker);
@@ -237,27 +266,27 @@ class _MapHomePageState extends State<MapHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+        body: Stack(
         children: [
-          GoogleMap(
-            onTap: _onMapTapped,
-            onMapCreated: _onMapCreated,
-            onCameraMove: (CameraPosition position) {
-              _currentZoom = position.zoom;
-              _updateVisibleMarkers(_currentZoom);
-            },
-            mapType: MapType.normal,
-            initialCameraPosition: _currentPosition != null
-                ? CameraPosition(
-              target: _currentPosition!,
-              zoom: _currentZoom,
-            )
-                : CameraPosition(
-              target: LatLng(37.50508097213444, 126.95493073306663),
-              zoom: _currentZoom,
-            ),
-            markers: _currentZoom >= 15.0 ? _visibleMarkers : _clusterMarkers,
+        GoogleMap(
+        onTap: _onMapTapped,
+        onMapCreated: _onMapCreated,
+        onCameraMove: (CameraPosition position) {
+      _currentZoom = position.zoom;
+      _updateVisibleMarkers(_currentZoom);
+        },
+          mapType: MapType.normal,
+          initialCameraPosition: _currentPosition != null
+              ? CameraPosition(
+            target: _currentPosition!,
+            zoom: _currentZoom,
+          )
+              : CameraPosition(
+            target: LatLng(37.50508097213444, 126.95493073306663),
+            zoom: _currentZoom,
           ),
+          markers: _currentZoom >= 15.0 ? _visibleMarkers : _clusterMarkers,
+        ),
           if (_selectedStoreName != null)
             Positioned(
               bottom: 50,
@@ -295,7 +324,7 @@ class _MapHomePageState extends State<MapHomePage> {
               ),
             ),
         ],
-      ),
+        ),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToCurrentLocation,
         child: Icon(Icons.my_location),
