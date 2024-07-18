@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/components/my_promocard.dart';
+import 'package:test_project/home/alarm_page.dart';
 import 'package:test_project/theme/theme.dart';
 import 'package:test_project/components/my_appbar.dart';
 import 'package:test_project/components/my_button.dart';
@@ -72,8 +73,8 @@ class MyHomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {},
+            icon: Icon(Icons.notifications_none_rounded),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>const AlarmPage())),
           ),
         ],
         titleSpacing: 0,
